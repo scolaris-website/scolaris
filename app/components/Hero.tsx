@@ -1,0 +1,141 @@
+export default function Hero() {
+  return (
+    <section
+      id="hero"
+      className="relative pt-32 pb-24 md:pt-44 md:pb-32 overflow-hidden"
+    >
+      {/* Halo lumineux */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full bg-brand/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(37,99,235,0.08),transparent_60%)]" />
+      </div>
+
+      {/* Drapeau du Sénégal — barre fine en haut */}
+      <div className="absolute top-16 inset-x-0 h-1 flex">
+        <div className="flex-1 bg-[#00853F]" />
+        <div className="flex-1 bg-[#FDEF42]" />
+        <div className="flex-1 bg-[#E31B23]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 grid md:grid-cols-2 gap-12 items-center">
+        {/* Colonne gauche — texte */}
+        <div className="animate-fade-up">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-ink-mute mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-green animate-pulse" />
+            Déjà en pilote dans 2 écoles privées sénégalaises
+          </div>
+
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
+            La plateforme de
+            <br />
+            <span className="bg-gradient-to-r from-brand to-brand-light bg-clip-text text-transparent">
+              gestion scolaire
+            </span>
+            <br />
+            du Sénégal
+          </h1>
+
+          <p className="mt-6 text-lg md:text-xl text-ink-mute leading-relaxed max-w-xl">
+            Centralisez les élèves, les notes, les paiements et les bulletins
+            dans <strong className="text-white">une seule plateforme</strong> moderne,
+            accessible sur mobile, en français et en arabe.
+          </p>
+
+          <div className="mt-10 flex flex-col sm:flex-row gap-4">
+            <a
+              href="#contact"
+              className="px-7 py-4 rounded-lg bg-brand hover:bg-brand-light text-white font-semibold text-center transition shadow-xl shadow-brand/30"
+            >
+              Demander une démo gratuite
+            </a>
+            <a
+              href="#solution"
+              className="px-7 py-4 rounded-lg border border-white/15 hover:border-white/30 hover:bg-white/5 text-white font-semibold text-center transition"
+            >
+              Découvrir la plateforme
+            </a>
+          </div>
+
+          <div className="mt-12 flex items-center gap-8 text-sm text-ink-dim">
+            <div>
+              <div className="text-2xl font-bold text-white">3 000+</div>
+              <div>écoles privées au Sénégal</div>
+            </div>
+            <div className="h-10 w-px bg-white/10" />
+            <div>
+              <div className="text-2xl font-bold text-white">2</div>
+              <div>écoles déjà en production</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Colonne droite — visuel produit */}
+        <div className="relative animate-fade-up" style={{ animationDelay: "0.2s" }}>
+          <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-brand/20">
+            <div className="aspect-[16/10] bg-gradient-to-br from-bg-mid to-bg-alt flex items-center justify-center">
+              {/* Mockup du dashboard */}
+              <div className="w-full h-full p-6 flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500/70" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/70" />
+                  </div>
+                  <div className="text-xs text-ink-dim">scolaris.sn / dashboard</div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-3 mt-3">
+                  <StatCard label="Élèves" value="847" trend="+12" color="brand" />
+                  <StatCard label="Encaissements" value="2.4M" suffix="FCFA" trend="+8%" color="green" />
+                  <StatCard label="Bulletins" value="312" trend="ce mois" color="violet" />
+                </div>
+
+                <div className="flex-1 rounded-lg bg-bg-deep/40 border border-white/5 p-4 mt-2">
+                  <div className="text-xs text-ink-mute mb-3">Activité récente</div>
+                  <div className="space-y-2">
+                    {[
+                      "Paiement enregistré — DIOP Mariama",
+                      "Bulletin publié — 6e A trimestre 2",
+                      "Notification absence — NDIAYE Pape",
+                    ].map((line, i) => (
+                      <div key={i} className="flex items-center gap-3 text-xs">
+                        <div className="w-1.5 h-1.5 rounded-full bg-accent-green" />
+                        <span className="text-ink-mute">{line}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Reflet */}
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StatCard({
+  label, value, suffix, trend, color,
+}: {
+  label: string; value: string; suffix?: string; trend: string;
+  color: "brand" | "green" | "violet";
+}) {
+  const colorMap = {
+    brand:  "border-brand/30 bg-brand/5",
+    green:  "border-accent-green/30 bg-accent-green/5",
+    violet: "border-accent-violet/30 bg-accent-violet/5",
+  };
+  return (
+    <div className={`rounded-lg border ${colorMap[color]} p-3`}>
+      <div className="text-xs text-ink-mute">{label}</div>
+      <div className="text-xl font-bold text-white mt-1">
+        {value}
+        {suffix && <span className="text-xs text-ink-dim ml-1">{suffix}</span>}
+      </div>
+      <div className="text-xs text-accent-green mt-1">{trend}</div>
+    </div>
+  );
+}

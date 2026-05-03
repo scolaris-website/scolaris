@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56" role="img" aria-label="Scolaris">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="34" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#1e6070"/>
+      <stop offset="50%"  stop-color="#1a5565"/>
+      <stop offset="100%" stop-color="#153d50"/>
+    </linearGradient>
+    <radialGradient id="hl3" cx="14" cy="11" r="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold3" x1="23" y1="19" x2="32" y2="35" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#e8c547"/>
+      <stop offset="50%"  stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#a07c10"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ── ICÔNE ── -->
+  <rect x="0" y="0" width="56" height="56" rx="8" fill="url(#bg3)"/>
+  <rect x="0" y="0" width="56" height="56" rx="8" fill="url(#hl3)"/>
+
+  <rect x="10" y="9" width="36" height="36" rx="5"
+        fill="white" fill-opacity="0.13"
+        stroke="white" stroke-opacity="0.20" stroke-width="0.8"/>
+
+  <path d="M 28 27 Q 21 24 15.1 27 L 15.1 38.2 Q 21.5 36 28 38.2 Z"
+        fill="none" stroke="white" stroke-opacity="0.85" stroke-width="1.1"
+        stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M 28 27 Q 35.1 24 40.9 27 L 40.9 38.2 Q 34.5 36 28 38.2 Z"
+        fill="none" stroke="white" stroke-opacity="0.85" stroke-width="1.1"
+        stroke-linejoin="round" stroke-linecap="round"/>
+  <line x1="28" y1="27" x2="28" y2="38.2"
+        stroke="white" stroke-opacity="0.85" stroke-width="1.1" stroke-linecap="round"/>
+
+  <path d="M 29.7 23.4 C 32.3 23.4, 32.3 27.8, 27.6 28 C 22.9 28.2, 22.9 32.6, 29.7 32.6"
+        fill="none" stroke="url(#gold3)" stroke-width="1.7" stroke-linecap="round"/>
+  <circle cx="30.3" cy="22.2" r="1.7" fill="url(#gold3)"/>
+
+  <!-- ── WORDMARK — texte blanc pour fond sombre ── -->
+  <text x="70" y="30"
+        font-family="Manrope, 'Segoe UI', Arial, sans-serif"
+        font-weight="700" font-size="22" fill="#FFFFFF">Scolaris</text>
+  <text x="71" y="44"
+        font-family="Manrope, 'Segoe UI', Arial, sans-serif"
+        font-weight="600" font-size="8" fill="#94A3B8" letter-spacing="2.5">SENEGALSOFT</text>
+</svg>
