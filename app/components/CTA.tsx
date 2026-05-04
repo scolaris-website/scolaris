@@ -28,7 +28,7 @@ export default function CTA() {
                 contact@scolaris.sn
               </a>
               <a
-                href="https://wa.me/221000000000"
+                href="https://wa.me/221774090492"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 rounded-lg border border-white/15 hover:border-accent-green/50 hover:bg-accent-green/5 text-white font-semibold transition flex items-center justify-center gap-2"
