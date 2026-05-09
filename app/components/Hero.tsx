@@ -41,7 +41,7 @@ export default function Hero() {
             accessible sur mobile, en français et en arabe.
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-4">
+          <div className="mt-10 flex flex-col sm:flex-row flex-wrap gap-4">
             <a
               href="#contact"
               className="px-7 py-4 rounded-lg bg-brand hover:bg-brand-light text-white font-semibold text-center transition shadow-xl shadow-brand/30"
@@ -49,10 +49,21 @@ export default function Hero() {
               Demander une démo gratuite
             </a>
             <a
+              href="https://youtu.be/d6yiiFiig9s"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-7 py-4 rounded-lg border border-white/15 hover:border-accent-red/50 hover:bg-accent-red/5 text-white font-semibold text-center transition flex items-center justify-center gap-2"
+            >
+              <svg className="w-5 h-5 text-accent-red" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              Voir la démo (3 min)
+            </a>
+            <a
               href="#solution"
               className="px-7 py-4 rounded-lg border border-white/15 hover:border-white/30 hover:bg-white/5 text-white font-semibold text-center transition"
             >
-              Découvrir la plateforme
+              Découvrir
             </a>
           </div>
 
@@ -71,7 +82,13 @@ export default function Hero() {
 
         {/* Colonne droite — visuel produit */}
         <div className="relative animate-fade-up" style={{ animationDelay: "0.2s" }}>
-          <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-brand/20">
+          <a
+            href="https://youtu.be/d6yiiFiig9s"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-brand/20 group cursor-pointer"
+            aria-label="Regarder la démo Scolaris (3 min)"
+          >
             <div className="aspect-[16/10] bg-gradient-to-br from-bg-mid to-bg-alt flex items-center justify-center">
               {/* Mockup du dashboard */}
               <div className="w-full h-full p-6 flex flex-col gap-4">
@@ -107,7 +124,26 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-          </div>
+
+            {/* Overlay vidéo — assombrissement + play */}
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+              <div className="relative">
+                {/* Halo pulsant */}
+                <div className="absolute inset-0 rounded-full bg-accent-red/30 blur-xl scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Bouton Play */}
+                <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-accent-red/95 flex items-center justify-center shadow-2xl shadow-accent-red/50 group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Badge "Démo 3 min" */}
+            <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur text-xs font-semibold text-white border border-white/10">
+              ▶ Démo 3:31
+            </div>
+          </a>
 
           {/* Reflet */}
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
