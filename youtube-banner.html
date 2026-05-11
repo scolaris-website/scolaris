@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<title>Bannière YouTube — Scolaris Sénégal</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #000; }
+  body {
+    width: 2048px;
+    height: 1152px;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(37,99,235,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse at 75% 60%, rgba(96,165,250,0.18) 0%, transparent 60%),
+      linear-gradient(135deg, #060d1a 0%, #0F172A 50%, #1E3A5F 100%);
+  }
+
+  /* Drapeau du Sénégal — bande verticale gauche */
+  .flag-strip {
+    position: absolute;
+    top: 0; left: 0;
+    width: 12px; height: 100%;
+    display: flex; flex-direction: column;
+  }
+  .flag-strip > div { flex: 1; }
+  .flag-green  { background: #00853F; }
+  .flag-yellow { background: #FDEF42; }
+  .flag-red    { background: #E31B23; }
+
+  /* Halos décoratifs */
+  .halo1 {
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 900px; height: 900px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(37,99,235,0.22) 0%, transparent 60%);
+    filter: blur(70px);
+  }
+  .halo2 {
+    position: absolute;
+    bottom: -180px; left: -100px;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(16,185,129,0.13) 0%, transparent 60%);
+    filter: blur(80px);
+  }
+  .halo3 {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1200px; height: 600px;
+    background: radial-gradient(ellipse, rgba(37,99,235,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Conteneur principal — zone safe centrée */
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 90px;
+    position: relative;
+    z-index: 2;
+    padding: 0 120px;
+  }
+
+  /* Logo (contient déjà "Scolaris") */
+  .logo {
+    width: 480px;
+    height: 480px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 30px 80px rgba(37,99,235,0.45));
+  }
+  .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Bloc texte à droite */
+  .text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1100px;
+  }
+
+  /* Petit badge au-dessus du tagline */
+  .pre-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 24px;
+    border-radius: 999px;
+    background: rgba(16,185,129,0.12);
+    border: 1.5px solid rgba(16,185,129,0.35);
+    font-size: 22px;
+    font-weight: 600;
+    color: #10B981;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .pre-badge .pulse {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 12px rgba(16,185,129,0.7);
+  }
+
+  /* Tagline principale */
+  .tagline {
+    font-size: 88px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    color: #FFFFFF;
+  }
+  .tagline strong {
+    background: linear-gradient(90deg, #2563EB 0%, #60A5FA 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+  }
+
+  /* Sous-titre */
+  .subline {
+    font-size: 36px;
+    color: #94A3B8;
+    margin-bottom: 44px;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  /* Badge URL */
+  .url-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 44px;
+    border-radius: 999px;
+    background: rgba(37,99,235,0.15);
+    border: 2px solid rgba(96,165,250,0.40);
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+  }
+  .url-badge .arrow {
+    color: #60A5FA;
+    font-weight: 700;
+  }
+
+  /* Mention coin bas droit */
+  .corner-badge {
+    position: absolute;
+    bottom: 60px; right: 80px;
+    font-size: 22px;
+    color: #64748B;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .corner-badge strong {
+    color: #FFFFFF;
+    font-weight: 700;
+  }
+
+  /* Mention coin bas gauche */
+  .corner-flag {
+    position: absolute;
+    bottom: 60px; left: 80px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 22px;
+    color: #94A3B8;
+  }
+  .corner-flag .mini-flag {
+    width: 36px; height: 24px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .corner-flag .mini-flag > div { flex: 1; }
+</style>
+</head>
+<body>
+  <div class="halo1"></div>
+  <div class="halo2"></div>
+  <div class="halo3"></div>
+
+  <div class="flag-strip">
+    <div class="flag-green"></div>
+    <div class="flag-yellow"></div>
+    <div class="flag-red"></div>
+  </div>
+
+  <div class="container">
+    <div class="logo">
+      <img src="scolaris-icon.png" alt="Scolaris" />
+    </div>
+
+    <div class="text">
+      <div class="pre-badge">
+        <span class="pulse"></span>
+        Plateforme officielle
+      </div>
+
+      <h1 class="tagline">
+        La <strong>gestion scolaire</strong><br />
+        du Sénégal,<br />
+        réinventée.
+      </h1>
+
+      <p class="subline">
+        Élèves · Notes · Paiements · Bulletins
+      </p>
+
+      <div class="url-badge">
+        <span class="arrow">→</span>
+        scolaris.sn
+      </div>
+    </div>
+  </div>
+
+  <div class="corner-flag">
+    <div class="mini-flag">
+      <div style="background:#00853F"></div>
+      <div style="background:#FDEF42"></div>
+      <div style="background:#E31B23"></div>
+    </div>
+    <span>Conçu au Sénégal</span>
+  </div>
+
+  <div class="corner-badge">
+    Par <strong>Groupe Senegalsoft</strong>
+  </div>
+</body>
+</html>

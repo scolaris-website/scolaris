@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<title>Scolaris — Dossier POESAM 2026 (v2)</title>
+<style>
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    color: #1a1a1a;
+    background: white;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  /* ── Page A4 standardisée ── */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 18mm 20mm;
+    position: relative;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* ── Header répété ── */
+  .page-header {
+    text-align: center;
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 10mm;
+  }
+  .page-footer {
+    position: absolute;
+    bottom: 10mm;
+    left: 0;
+    right: 0;
+    text-align: right;
+    padding: 0 20mm;
+    font-size: 11px;
+    color: #999;
+  }
+
+  /* ── Titre de section avec numéro ── */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6mm;
+    padding-bottom: 3mm;
+    border-bottom: 2px solid #1a5565;
+  }
+  .section-num {
+    width: 32px; height: 32px;
+    background: #1a1a1a;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-title h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 5mm 0 3mm;
+    padding-left: 3mm;
+    border-left: 3px solid #1a5565;
+  }
+
+  p { font-size: 11.5px; margin-bottom: 3mm; }
+  ul { padding-left: 5mm; margin-bottom: 3mm; }
+  li { font-size: 11.5px; margin-bottom: 1.5mm; }
+  strong { color: #1a1a1a; font-weight: 700; }
+
+  .accent { color: #1a5565; font-weight: 700; }
+
+  /* ── Tables ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin: 3mm 0;
+  }
+  th {
+    background: #1a5565;
+    color: white;
+    padding: 2.5mm 3mm;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+  td {
+    padding: 2.5mm 3mm;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  tr:nth-child(even) td { background: #F7FAFB; }
+
+  /* ── Encadrés colorés ── */
+  .box {
+    padding: 4mm 5mm;
+    border-radius: 6px;
+    margin: 3mm 0;
+    font-size: 11.5px;
+  }
+  .box-orange { background: #F4F8F9; border-left: 4px solid #1a5565; }
+  .box-green  { background: #F0FDF4; border-left: 4px solid #16A34A; }
+  .box-red    { background: #FEF2F2; border-left: 4px solid #DC2626; }
+  .box-blue   { background: #EFF6FF; border-left: 4px solid #2563EB; }
+  .box-purple { background: #FAF5FF; border-left: 4px solid #9333EA; }
+  .box-yellow { background: #FAF6E8; border-left: 4px solid #c9a227; }
+
+  .box h4 {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 2mm;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .box-orange h4 { color: #1a5565; }
+  .box-green h4  { color: #16A34A; }
+  .box-red h4    { color: #DC2626; }
+  .box-blue h4   { color: #2563EB; }
+  .box-purple h4 { color: #9333EA; }
+  .box-yellow h4 { color: #c9a227; }
+
+  /* ── Grille 2 colonnes ── */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4mm;
+    margin: 3mm 0;
+  }
+
+  /* ── KPI cards ── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3mm;
+    margin: 4mm 0;
+  }
+  .kpi {
+    background: linear-gradient(135deg, #1a5565 0%, #1e6070 100%);
+    color: white;
+    padding: 4mm 3mm;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .kpi-num { font-size: 22px; font-weight: 800; line-height: 1; }
+  .kpi-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2mm; opacity: 0.95; }
+
+  /* ── Profil membre équipe ── */
+  .member {
+    background: #F4F8F9;
+    padding: 5mm;
+    border-radius: 6px;
+    margin-bottom: 4mm;
+  }
+  .member h3 {
+    font-size: 16px;
+    border-left: none;
+    padding-left: 0;
+    margin: 0 0 1mm;
+  }
+  .member-role {
+    font-size: 10.5px;
+    color: #1a5565;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 3mm;
+  }
+  .member ul { padding-left: 5mm; }
+  .member li { font-size: 11px; }
+
+  /* ── Captures d'écran ── */
+  .screenshots-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+    margin: 4mm 0;
+  }
+  .screenshot {
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .screenshot-img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    display: block;
+    background: #f0f0f0;
+  }
+  .screenshot-caption {
+    padding: 2.5mm 3mm;
+    background: #F7FAFB;
+    font-size: 10px;
+    font-weight: 600;
+    color: #1a1a1a;
+    border-top: 2px solid #1a5565;
+  }
+
+  /* ── Page de couverture ── */
+  .cover {
+    background: linear-gradient(135deg, #1a5565 0%, #1e6070 60%, #c9a227 100%);
+    color: white;
+    width: 210mm;
+    height: 297mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 30mm;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -100mm; right: -100mm;
+    width: 300mm; height: 300mm;
+    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 60%);
+    border-radius: 50%;
+  }
+  .cover-badge {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 3mm 8mm;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 15mm;
+    z-index: 2;
+  }
+  .cover-title {
+    font-size: 90px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 15mm;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 2;
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 25mm;
+    max-width: 140mm;
+    z-index: 2;
+  }
+  .cover-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4mm;
+    width: 100%;
+    margin-bottom: 5mm;
+    z-index: 2;
+  }
+  .cover-info {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    padding: 4mm;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .cover-info-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.85;
+    margin-bottom: 1.5mm;
+  }
+  .cover-info-value {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .cover-bottom {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 4mm 8mm;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
+    z-index: 2;
+    margin-top: 5mm;
+  }
+  .cover-links {
+    margin-top: 6mm;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3mm;
+    justify-content: center;
+    font-size: 9.5px;
+    z-index: 2;
+    max-width: 160mm;
+  }
+  .cover-links span {
+    color: white;
+    background: rgba(255,255,255,0.18);
+    padding: 1.8mm 4mm;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.35);
+    white-space: nowrap;
+  }
+
+  /* ── Page finale ── */
+  .footer-page {
+    background: #1a1a1a;
+    color: white;
+    padding: 5mm 20mm;
+    margin-top: auto;
+  }
+
+  /* ── Print specific ── */
+  @media print {
+    .page, .cover { page-break-after: always; }
+    body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 1 — COUVERTURE                                                  -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-badge">Dossier de candidature · POESAM 2026</div>
+
+  <img src="scolaris-icon.png" alt="Scolaris" style="width: 140px; height: 140px; margin-bottom: 10mm; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3)); z-index: 2; border-radius: 24px;" />
+
+  <h1 class="cover-title">SCOLARIS</h1>
+
+  <div style="width: 80px; height: 4px; background: linear-gradient(90deg, transparent, #c9a227, transparent); margin: -8mm 0 8mm; z-index: 2;"></div>
+
+  <p class="cover-subtitle">
+    La gestion scolaire numérique<br />pour les écoles privées sénégalaises
+  </p>
+
+  <div class="cover-info-grid">
+    <div class="cover-info">
+      <div class="cover-info-label">Secteur</div>
+      <div class="cover-info-value">Éducation</div>
+    </div>
+    <div class="cover-info">
+      <div class="cover-info-label">Pays</div>
+      <div class="cover-info-value">Sénégal</div>
+    </div>
+    <div class="cover-info">
+      <div class="cover-info-label">Lancé en</div>
+      <div class="cover-info-value">2025</div>
+    </div>
+  </div>
+
+  <div class="cover-info-grid">
+    <div class="cover-info">
+      <div class="cover-info-label">Porteur</div>
+      <div class="cover-info-value">Aly DIOUF</div>
+    </div>
+    <div class="cover-info">
+      <div class="cover-info-label">Co-fondatrice</div>
+      <div class="cover-info-value">Sophie DIOP</div>
+    </div>
+    <div class="cover-info">
+      <div class="cover-info-label">Structure</div>
+      <div class="cover-info-value">Groupe Senegalsoft</div>
+    </div>
+  </div>
+
+  <div class="cover-bottom">
+    Prix Orange de l'Entrepreneur Social en Afrique et Moyen-Orient · POESAM 2026
+  </div>
+
+  <div class="cover-links">
+    <span>🌐 scolaris-gamma.vercel.app</span>
+    <span>📺 youtube.com/@scolaris_senegal</span>
+    <span>💼 linkedin.com/company/scolaris-senegal</span>
+    <span>📘 facebook.com/ScolarisSenegal</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 2 — RÉSUMÉ SYNTHÉTIQUE                                          -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">Scolaris – Dossier POESAM 2026</div>
+
+  <div class="section-title">
+    <div class="section-num">1</div>
+    <h2>Résumé synthétique du projet</h2>
+  </div>
+
+  <p>
+    Au Sénégal, plus de <strong>3 000 écoles privées</strong> scolarisent une part croissante des élèves, notamment dans les zones urbaines de Dakar, Rufisque et Pikine. Pourtant, la grande majorité de ces établissements gèrent encore leurs activités administratives et pédagogiques de façon <strong>entièrement manuelle</strong> : registres papier, carnets de notes manuscrits, reçus de paiement non sécurisés, et absence de communication structurée avec les parents.
+  </p>
+
+  <p>
+    Cette réalité engendre des pertes d'informations, des erreurs administratives fréquentes, une opacité financière et un sentiment d'exclusion des parents — notamment des mères — du suivi scolaire de leurs enfants.
+  </p>
+
+  <div class="box box-orange">
+    <strong class="accent">Scolaris</strong> est une plateforme numérique de gestion scolaire développée en 2025 par le Groupe Senegalsoft, conçue spécifiquement pour les établissements privés sénégalais. Accessible sur ordinateur et smartphone, elle offre une solution complète, abordable et adaptée aux réalités locales, incluant le support des écoles <strong>franco-arabes</strong> et <strong>bilingues</strong>.
+  </div>
+
+  <p>
+    Deux établissements pilotes valident déjà son efficacité : l'école primaire franco-arabe <strong>El Hadji Ibrahima NIASS</strong> et l'<strong>École Vision Bilingue</strong>. L'objectif est d'atteindre <strong>20 écoles en 2027</strong> et <strong>40 écoles en 2028</strong>, avant une expansion régionale en Afrique de l'Ouest francophone.
+  </p>
+
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="kpi-num">2</div>
+      <div class="kpi-label">Écoles pilotes actives</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-num">20</div>
+      <div class="kpi-label">Cible 2027</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-num">40</div>
+      <div class="kpi-label">Cible 2028</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-num">3 000+</div>
+      <div class="kpi-label">Écoles privées au Sénégal</div>
+    </div>
+  </div>
+
+  <div class="box box-blue">
+    <h4>Pourquoi maintenant ?</h4>
+    <p style="margin: 0;">
+      Le Sénégal connaît une accélération unique : <strong>généralisation du smartphone</strong> dans les écoles, <strong>politique nationale de digitalisation</strong> portée par l'État, et <strong>croissance de 40% des effectifs privés en 10 ans</strong>. Aucune solution locale n'occupe ce créneau. Les acteurs internationaux sont inadaptés. La fenêtre est ouverte — pour 18 à 24 mois.
+    </p>
+  </div>
+
+  <div class="page-footer">2 / 9</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 3 — ANALYSE DU MARCHÉ                                           -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">Scolaris – Dossier POESAM 2026</div>
+
+  <div class="section-title">
+    <div class="section-num">2</div>
+    <h2>Analyse du marché</h2>
+  </div>
+
+  <h3>Segmentation du marché</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Segment</th>
+        <th>Profil</th>
+        <th>Potentiel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Écoles franco-arabes</strong></td>
+        <td>Forte croissance dans la banlieue dakaroise, besoin de support arabe/français</td>
+        <td>Élevé ★★★★</td>
+      </tr>
+      <tr>
+        <td><strong>Écoles bilingues privées laïques</strong></td>
+        <td>Clientèle aisée, sensible à la qualité et au numérique</td>
+        <td>Très élevé ★★★★★</td>
+      </tr>
+      <tr>
+        <td><strong>Écoles privées catholiques</strong></td>
+        <td>Bien organisées, informatisation partielle existante</td>
+        <td>Moyen ★★★</td>
+      </tr>
+      <tr>
+        <td><strong>Écoles communautaires</strong></td>
+        <td>Budget limité, besoin fort de structuration</td>
+        <td>À terme ★★</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size: 10.5px; color: #666; font-style: italic;">
+    Marché cible immédiat : région de Dakar (Dakar, Rufisque, Pikine, Guédiawaye) — estimation : 800 à 1 200 établissements éligibles.
+  </p>
+
+  <h3>Analyse SWOT</h3>
+
+  <div class="grid-2">
+    <div class="box box-green">
+      <h4>Forces</h4>
+      <ul style="margin: 0;">
+        <li>Solution locale, adaptée au contexte sénégalais</li>
+        <li>Prototype opérationnel avec 2 écoles pilotes</li>
+        <li>Fondateur avec double expertise IT et gestion</li>
+        <li>Accessibilité mobile, interface simple</li>
+        <li>Support franco-arabe, adapté au marché</li>
+      </ul>
+    </div>
+    <div class="box box-red">
+      <h4>Faiblesses</h4>
+      <ul style="margin: 0;">
+        <li>Équipe technique réduite à ce stade</li>
+        <li>Notoriété encore limitée</li>
+        <li>Absence de financement externe à ce jour</li>
+        <li>Couverture géographique initiale limitée à Dakar</li>
+      </ul>
+    </div>
+    <div class="box box-blue">
+      <h4>Opportunités</h4>
+      <ul style="margin: 0;">
+        <li>Digitalisation croissante du secteur éducatif</li>
+        <li>Politique publique de numérisation de l'éducation</li>
+        <li>Programmes DER/FJ et Délégation Entrepreneuriat Rapide</li>
+        <li>Levées EdTech africaine (Norrsken, AfricInvest, Partech Africa)</li>
+        <li>Expansion possible vers les pays francophones voisins</li>
+      </ul>
+    </div>
+    <div class="box box-purple">
+      <h4>Menaces</h4>
+      <ul style="margin: 0;">
+        <li>Concurrents internationaux aux grands moyens</li>
+        <li>Résistance au changement dans certains établissements</li>
+        <li>Instabilité de la connexion internet dans certaines zones</li>
+        <li>Risque de pression tarifaire si nouveaux entrants locaux</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-footer">3 / 9</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 4 — CONCURRENCE & OPPORTUNITÉ                                   -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">Scolaris – Dossier POESAM 2026</div>
+
+  <h3 style="margin-top: 0;">Concurrence</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Concurrent</th>
+        <th>Origine</th>
+        <th>Faiblesse face à Scolaris</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>SchoolMaster</strong></td>
+        <td>International</td>
+        <td>Coût élevé, non adapté aux franco-arabes, pas de support local</td>
+      </tr>
+      <tr>
+        <td><strong>EduTech Africa</strong> (Nigeria)</td>
+        <td>Anglophone</td>
+        <td>Interface anglophone uniquement, pas de support arabe, modèle inadapté Sénégal</td>
+      </tr>
+      <tr>
+        <td><strong>Solutions françaises génériques</strong></td>
+        <td>France (Pronote, EcoleDirecte)</td>
+        <td>Non localisées, pas de support wolof/arabe, tarifs inadaptés</td>
+      </tr>
+      <tr>
+        <td><strong>Excel / Registres papier</strong></td>
+        <td>—</td>
+        <td>Aucune automatisation, risque de perte de données, pas de communication parents</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Partenaires</h3>
+
+  <ul>
+    <li><strong>École El Hadji Ibrahima NIASS</strong> — partenaire pilote, école primaire franco-arabe</li>
+    <li><strong>École Vision Bilingue</strong> — partenaire pilote, école bilingue</li>
+    <li><strong>Groupe Senegalsoft SARL</strong> — structure porteuse, expertise IT et gestion administrative</li>
+  </ul>
+
+  <div class="section-title" style="margin-top: 8mm;">
+    <div class="section-num">3</div>
+    <h2>Identification de l'opportunité</h2>
+  </div>
+
+  <p>
+    Le Sénégal compte plus de <strong>3 000 écoles privées</strong>, un chiffre en constante augmentation sous l'effet de la croissance démographique urbaine et de la demande des familles pour une éducation de qualité. Selon les données de la Direction de l'Enseignement Privé, les effectifs des écoles privées ont augmenté de plus de <strong>40% en dix ans</strong>.
+  </p>
+
+  <p>
+    Or, aucune solution numérique locale abordable et adaptée n'est disponible pour ces établissements. Les rares outils existants sont soit trop coûteux, soit inadaptés aux spécificités sénégalaises :
+  </p>
+
+  <ul>
+    <li>Trilinguisme français-arabe-wolof dans les écoles franco-arabes</li>
+    <li>Structure des frais de scolarité en tranches mensuelles ou trimestrielles</li>
+    <li>Gestion des calendriers islamiques pour certains établissements</li>
+    <li>Faible maîtrise de l'outil informatique par certains enseignants</li>
+  </ul>
+
+  <div class="box box-orange">
+    Scolaris occupe un <strong>créneau inexploité</strong> : une solution SaaS locale, abordable, opérationnelle immédiatement et capable de couvrir l'ensemble du territoire sénégalais. À terme, le modèle est <strong>duplicable dans les pays francophones d'Afrique de l'Ouest</strong> partageant les mêmes caractéristiques éducatives : Mali, Guinée, Côte d'Ivoire, Burkina Faso.
+  </div>
+
+  <div class="page-footer">4 / 9</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 5 — DESCRIPTION DU PRODUIT                                      -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">Scolaris – Dossier POESAM 2026</div>
+
+  <div class="section-title">
+    <div class="section-num">4</div>
+    <h2>Description du produit / service</h2>
+  </div>
+
+  <p>
+    Scolaris est une <strong>plateforme web de gestion scolaire tout-en-un</strong>, accessible sur ordinateur et smartphone sans installation complexe. Elle est construite avec des technologies robustes et éprouvées (Django, PostgreSQL), garantissant sécurité et évolutivité.
+  </p>
+
+  <h3>6 modules métier intégrés</h3>
+
+  <div class="grid-2">
+    <div class="box box-orange">
+      <h4>📋 Gestion des inscriptions</h4>
+      <p style="margin:0;">Dossiers élèves numériques, archivage sécurisé, suivi des documents requis</p>
+    </div>
+    <div class="box box-orange">
+      <h4>📊 Notes & Bulletins</h4>
+      <p style="margin:0;">Saisie des notes, calcul automatique des moyennes, génération et impression des bulletins conformes aux standards officiels</p>
+    </div>
+    <div class="box box-orange">
+      <h4>💰 Gestion des paiements</h4>
+      <p style="margin:0;">Suivi des frais de scolarité par tranches, reçus numériques imprimables, tableau des impayés</p>
+    </div>
+    <div class="box box-orange">
+      <h4>✅ Suivi des présences</h4>
+      <p style="margin:0;">Enregistrement quotidien, alertes SMS automatiques aux parents en cas d'absence</p>
+    </div>
+    <div class="box box-orange">
+      <h4>💬 Communication parents-école</h4>
+      <p style="margin:0;">Notifications, messagerie interne, diffusion de circulaires et annonces ciblées</p>
+    </div>
+    <div class="box box-orange">
+      <h4>📈 Tableau de bord direction</h4>
+      <p style="margin:0;">Statistiques globales, indicateurs de performance, exports Excel/CSV pour les décideurs</p>
+    </div>
+  </div>
+
+  <h3>Valeur ajoutée différenciante</h3>
+
+  <ul>
+    <li>Interface disponible en <strong>français et arabe</strong>, adaptée aux écoles franco-arabes</li>
+    <li>Accessible <strong>sans connexion permanente</strong> (mode adapté aux réalités locales)</li>
+    <li>Tarification SaaS accessible, pensée pour les petites écoles privées sénégalaises</li>
+    <li>Support et formation assurés en local, en français et en wolof</li>
+    <li>Solution évolutive : nouveaux modules ajoutables selon les besoins</li>
+    <li>Bulletins conformes aux <strong>standards officiels de la République du Sénégal</strong></li>
+  </ul>
+
+  <div class="page-footer">5 / 9</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 6 — CAPTURES D'ÉCRAN  [NOUVELLE PAGE]                           -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">Scolaris – Dossier POESAM 2026</div>
+
+  <h3 style="margin-top: 0;">La plateforme en images</h3>
+
+  <p>
+    Scolaris est <strong>opérationnel et déployé</strong>. Voici 4 captures d'écran de la plateforme actuellement utilisée dans les écoles pilotes :
+  </p>
+
+  <div class="screenshots-grid">
+    <div class="screenshot">
+      <img src="captures/cap01.png" alt="Tableau de bord" class="screenshot-img" />
+      <div class="screenshot-caption">📊 Tableau de bord direction — Vue temps réel</div>
+    </div>
+    <div class="screenshot">
+      <img src="captures/elv-fiche.png" alt="Fiche élève" class="screenshot-img" />
+      <div class="screenshot-caption">👤 Fiche élève — Profil complet centralisé</div>
+    </div>
+    <div class="screenshot">
+      <img src="captures/bul-detail.png" alt="Bulletin" class="screenshot-img" />
+      <div class="screenshot-caption">📝 Bulletin de notes — Conforme aux standards officiels</div>
+    </div>
+    <div class="screenshot">
+      <img src="captures/fin-recu.png" alt="Reçu de paiement" class="screenshot-img" />
+      <div class="screenshot-caption">💰 Reçu de paiement — Imprimable en deux exemplaires</div>
+    </div>
+  </div>
+
+  <div class="box box-blue">
+    <h4>Démonstration vidéo (3 minutes)</h4>
+    <p style="margin: 0;">
+      Une vidéo de présentation détaillée est disponible sur YouTube :<br />
+      <strong style="font-size: 13px;">→ https://youtu.be/d6yiiFiig9s</strong>
+    </p>
+  </div>
+
+  <div class="grid-2">
+    <div class="box box-orange">
+      <h4>Site officiel</h4>
+      <p style="margin: 0; font-size: 11px;">
+        <strong>scolaris-gamma.vercel.app</strong>
+      </p>
+    </div>
+    <div class="box box-purple">
+      <h4>Suivez-nous</h4>
+      <p style="margin: 0; font-size: 10.5px; line-height: 1.7;">
+        💼 linkedin.com/company/scolaris-senegal<br />
+        📘 facebook.com/ScolarisSenegal<br />
+        📺 youtube.com/@scolaris_senegal
+      </p>
+    </div>
+  </div>
+
+  <div class="page-footer">6 / 9</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 7 — ÉQUIPE DE MANAGEMENT                                        -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">Scolaris – Dossier POESAM 2026</div>
+
+  <div class="section-title">
+    <div class="section-num">5</div>
+    <h2>Équipe de management</h2>
+  </div>
+
+  <div class="member">
+    <h3>Aly DIOUF</h3>
+    <div class="member-role">Fondateur &amp; Directeur Technique · Groupe Senegalsoft</div>
+    <ul>
+      <li><strong>Formation :</strong> Licence en Comptabilité et Gestion (ISEG Dakar, 2013), DTS Comptabilité Gestion, formation en développement web et maintenance informatique (CNFDI France, 2010)</li>
+      <li><strong>Expérience :</strong> Responsable Administratif et Financier à l'ONG Eau Vie Environnement depuis 2012, responsable technique de l'équipement informatique à Enda Graf Sahel (2002–2011)</li>
+      <li><strong>Entrepreneuriat :</strong> Fondateur du Groupe Senegalsoft SARL (2018), coach en entrepreneuriat social, membre fondateur du Réseau des Jeunes Citoyens Sénégalais</li>
+      <li><strong>Engagement Scolaris :</strong> activité salariée parallèle à l'ONG (Eau Vie Environnement) qui finance la phase d'amorçage de Scolaris jusqu'au seuil de rentabilité 2027. Engagement projet estimé à 60% du temps utile.</li>
+      <li><strong>Rôle sur Scolaris :</strong> Conception, développement et maintenance de la plateforme, stratégie technique et produit</li>
+    </ul>
+  </div>
+
+  <div class="member">
+    <h3>Sophie DIOP</h3>
+    <div class="member-role">Co-fondatrice &amp; Gérante · Groupe Senegalsoft</div>
+    <ul>
+      <li><strong>Formation :</strong> BFEM (CEM Momar Mareme DIOP de Yeumbeul), formation en hôtellerie et restauration (Centre communautaire Galle Nanondiral, Pikine)</li>
+      <li><strong>Expérience entrepreneuriale :</strong> 7 ans de gestion opérationnelle au Groupe Senegalsoft (depuis avril 2018), direction commerciale et relation client B2B</li>
+      <li><strong>Atout marché :</strong> connaissance fine du terrain dakarois, capacité à dialoguer directement avec les directeurs et directrices d'écoles privées dans leur langue de travail (français, wolof). Cycle de vente B2B de Scolaris repose sur cette compétence.</li>
+      <li><strong>Leadership :</strong> Femme entrepreneure dans le secteur tech au Sénégal — modèle d'autonomisation féminine dans l'économie numérique</li>
+      <li><strong>Rôle sur Scolaris :</strong> gestion opérationnelle quotidienne, déploiement chez les clients, suivi des partenariats et formation des écoles pilotes</li>
+    </ul>
+  </div>
+
+  <div class="box box-green">
+    <h4>Complémentarité du binôme</h4>
+    <p style="margin: 0;">
+      <strong>Aly</strong> couvre la dimension <strong>technique et stratégique</strong> ; <strong>Sophie</strong> couvre la dimension <strong>opérationnelle et commerciale terrain</strong>. Cette complémentarité tech + ops, classique dans les startups SaaS B2B à succès, permet à Scolaris de combiner développement produit rapide et déploiement de proximité chez les clients — un avantage décisif sur les solutions internationales déconnectées du terrain sénégalais.
+    </p>
+  </div>
+
+  <div class="page-footer">7 / 9</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 8 — PRÉVISIONS FINANCIÈRES                                      -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">Scolaris – Dossier POESAM 2026</div>
+
+  <div class="section-title">
+    <div class="section-num">6</div>
+    <h2>Prévisions financières sur 3 ans</h2>
+  </div>
+
+  <h3>Modèle économique — Abonnement annuel SaaS</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Plan</th>
+        <th>Profil établissement</th>
+        <th>Prix annuel (FCFA)</th>
+        <th>Prix annuel (€)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Starter</strong></td>
+        <td>Petite école &lt; 200 élèves</td>
+        <td>75 000 FCFA</td>
+        <td>~115 €</td>
+      </tr>
+      <tr>
+        <td><strong>Standard</strong></td>
+        <td>École moyenne 200–500 élèves</td>
+        <td>130 000 FCFA</td>
+        <td>~200 €</td>
+      </tr>
+      <tr>
+        <td><strong>Premium</strong></td>
+        <td>Grande école &gt; 500 élèves</td>
+        <td>220 000 FCFA</td>
+        <td>~335 €</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Projections de revenus et charges</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Année</th>
+        <th>Nombre d'écoles</th>
+        <th>Revenus estimés</th>
+        <th>Charges estimées</th>
+        <th>Résultat net</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>2026</strong></td>
+        <td>2 (pilotes, tarif réduit 50%)</td>
+        <td>130 000 FCFA</td>
+        <td>500 000 FCFA</td>
+        <td style="color: #DC2626; font-weight: 700;">−370 000 FCFA</td>
+      </tr>
+      <tr>
+        <td><strong>2027</strong></td>
+        <td>20 écoles</td>
+        <td>2 600 000 FCFA</td>
+        <td>1 500 000 FCFA</td>
+        <td style="color: #16A34A; font-weight: 700;">+1 100 000 FCFA</td>
+      </tr>
+      <tr>
+        <td><strong>2028</strong></td>
+        <td>40 écoles</td>
+        <td>5 200 000 FCFA</td>
+        <td>2 200 000 FCFA</td>
+        <td style="color: #16A34A; font-weight: 700;">+3 000 000 FCFA</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Détail des charges annuelles (2027)</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Poste de charge</th>
+        <th>Montant estimé</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Hébergement serveur et infrastructure (cloud + sauvegardes)</td><td>120 000 FCFA</td></tr>
+      <tr><td>Marketing, démarchage commercial et communication digitale</td><td>900 000 FCFA</td></tr>
+      <tr><td>Support client et formation des établissements</td><td>280 000 FCFA</td></tr>
+      <tr><td>Développement et amélioration de la plateforme</td><td>200 000 FCFA</td></tr>
+      <tr style="background: #DCEAEE;"><td><strong>Total</strong></td><td><strong>1 500 000 FCFA</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="box box-yellow">
+    <h4>Note importante sur la rémunération des fondateurs</h4>
+    <p style="margin: 0;">
+      Ces projections <strong>excluent volontairement la rémunération des fondateurs</strong> durant la phase d'amorçage 2026-2027. Aly DIOUF maintient une activité salariée parallèle (ONG Eau Vie Environnement) qui finance le développement initial. Sophie DIOP capitalise son temps sur le projet en tant que co-gérante du Groupe Senegalsoft. À partir de 2028, le seuil de rentabilité atteint permettra une rémunération progressive des fondateurs et le recrutement d'une équipe technique additionnelle (1 développeur + 1 commercial).
+    </p>
+  </div>
+
+  <div class="box box-orange">
+    <strong>Autofinancement atteint dès 2027.</strong> L'éventuel prix POESAM (jusqu'à 25 000 € ≈ 16,4 millions FCFA) permettrait d'<strong>accélérer significativement</strong> le développement commercial, de renforcer l'équipe technique et de préparer l'expansion régionale vers le Mali, la Guinée et la Côte d'Ivoire dès 2029.
+  </div>
+
+  <div class="page-footer">8 / 9</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<!-- PAGE 9 — IMPACT SOCIÉTAL                                             -->
+<!-- ════════════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">Scolaris – Dossier POESAM 2026</div>
+
+  <div class="section-title">
+    <div class="section-num">7</div>
+    <h2>Évaluation de l'impact sociétal</h2>
+  </div>
+
+  <div class="grid-2">
+    <div class="box box-orange">
+      <h4>Impact éducatif direct</h4>
+      <ul style="margin: 0;">
+        <li>Amélioration de la qualité de gestion dans les écoles privées sénégalaises</li>
+        <li>Réduction des erreurs administratives et des pertes d'information</li>
+        <li>Meilleur suivi scolaire pour les élèves</li>
+        <li>À 40 écoles en 2028 : potentiellement <strong>15 000 à 20 000 élèves</strong> bénéficiaires</li>
+      </ul>
+    </div>
+    <div class="box box-purple">
+      <h4>Impact sur l'équité de genre</h4>
+      <ul style="margin: 0;">
+        <li>Projet co-fondé et géré par une femme (Mme Sophie DIOP)</li>
+        <li>Améliore les conditions de travail des enseignantes (gain de temps administratif)</li>
+        <li>Facilite l'accès à l'information pour les <strong>mères de famille</strong>, principales gestionnaires de la scolarité</li>
+        <li>Renforce l'autonomie des directrices d'école (40% du parc privé)</li>
+        <li><strong>Détection précoce du décrochage des filles</strong> via le suivi des absences</li>
+      </ul>
+    </div>
+    <div class="box box-blue">
+      <h4>Impact social et familial</h4>
+      <ul style="margin: 0;">
+        <li>Transparence financière accrue sur les frais de scolarité</li>
+        <li>Réduction du décrochage scolaire lié aux défaillances administratives</li>
+        <li>Communication renforcée entre familles et établissements</li>
+        <li>Valorisation des écoles franco-arabes dans l'écosystème éducatif</li>
+      </ul>
+    </div>
+    <div class="box box-green">
+      <h4>Impact économique et scalabilité</h4>
+      <ul style="margin: 0;">
+        <li>Création d'emplois locaux dans le secteur EdTech sénégalais</li>
+        <li>Modèle duplicable en Afrique de l'Ouest francophone</li>
+        <li>Technologie ouverte, sans dépendance à des licences étrangères</li>
+        <li>Contribution à la souveraineté numérique du Sénégal</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box box-orange" style="margin-top: 5mm;">
+    <h4>Vision 2030</h4>
+    <p style="margin: 0;">
+      Scolaris ambitionne de devenir <strong>la référence de la gestion scolaire numérique en Afrique de l'Ouest francophone</strong>, en accompagnant plus de 200 établissements dans 5 pays, et en contribuant à améliorer l'accès à une éducation de qualité pour des centaines de milliers d'élèves.
+    </p>
+  </div>
+
+  <div class="footer-page" style="margin-top: 8mm; border-radius: 6px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4mm;">
+      <div>
+        <div style="color: #1e6070; font-weight: 700; margin-bottom: 1mm;">Scolaris</div>
+        <div style="font-size: 10px; opacity: 0.8;">Groupe Senegalsoft SARL · Rufisque 2, Lot 379E, Sénégal</div>
+      </div>
+      <div style="text-align: right; font-size: 10px;">
+        <div>Candidature POESAM 2026</div>
+        <div style="color: #1e6070;">senegalscolaris@gmail.com</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">9 / 9</div>
+</div>
+
+</body>
+</html>

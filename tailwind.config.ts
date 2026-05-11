@@ -6,13 +6,14 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          deep: "#060d1a",
-          mid: "#0F172A",
-          alt: "#1E3A5F",
+          deep: "#0a2530",   // teal foncé Scolaris (au lieu de presque noir)
+          mid:  "#133a48",   // teal medium
+          alt:  "#1a5565",   // teal Scolaris (couleur principale du logo)
         },
         brand: {
-          DEFAULT: "#2563EB",
-          light: "#60A5FA",
+          DEFAULT: "#1a5565",   // teal Scolaris principal
+          light:   "#2a7588",   // teal Scolaris clair
+          accent:  "#c9a227",   // doré Scolaris (serpent du logo)
         },
         accent: {
           green: "#10B981",
