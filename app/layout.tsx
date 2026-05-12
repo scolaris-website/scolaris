@@ -6,9 +6,6 @@ const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://scolaris.sn"),
-  icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-  },
   title: "Scolaris — Plateforme de gestion scolaire du Sénégal",
   description:
     "Scolaris centralise la gestion des élèves, des notes, des paiements et des bulletins pour les écoles privées du Sénégal. Une plateforme numérique complète, en français et en arabe.",
