@@ -44,19 +44,19 @@ const modules = [
 ];
 
 const colorClasses: Record<string, { border: string; bg: string; text: string; glow: string }> = {
-  brand:  { border: "border-brand/30",          bg: "bg-brand/5",          text: "text-brand-light",     glow: "from-brand/20" },
-  cyan:   { border: "border-accent-cyan/30",    bg: "bg-accent-cyan/5",    text: "text-accent-cyan",     glow: "from-accent-cyan/20" },
-  green:  { border: "border-accent-green/30",   bg: "bg-accent-green/5",   text: "text-accent-green",    glow: "from-accent-green/20" },
-  amber:  { border: "border-accent-amber/30",   bg: "bg-accent-amber/5",   text: "text-accent-amber",    glow: "from-accent-amber/20" },
-  violet: { border: "border-accent-violet/30",  bg: "bg-accent-violet/5",  text: "text-accent-violet",   glow: "from-accent-violet/20" },
-  orange: { border: "border-accent-orange/30",  bg: "bg-accent-orange/5",  text: "text-accent-orange",   glow: "from-accent-orange/20" },
+  brand:  { border: "border-brand/50",          bg: "bg-bg-mid/80",        text: "text-brand-light",     glow: "from-brand/25" },
+  cyan:   { border: "border-accent-cyan/50",    bg: "bg-bg-mid/80",        text: "text-accent-cyan",     glow: "from-accent-cyan/25" },
+  green:  { border: "border-accent-green/50",   bg: "bg-bg-mid/80",        text: "text-accent-green",    glow: "from-accent-green/25" },
+  amber:  { border: "border-accent-amber/50",   bg: "bg-bg-mid/80",        text: "text-accent-amber",    glow: "from-accent-amber/25" },
+  violet: { border: "border-accent-violet/50",  bg: "bg-bg-mid/80",        text: "text-accent-violet",   glow: "from-accent-violet/25" },
+  orange: { border: "border-accent-orange/50",  bg: "bg-bg-mid/80",        text: "text-accent-orange",   glow: "from-accent-orange/25" },
 };
 
 export default function Modules() {
   return (
-    <section id="modules" className="py-24 md:py-32 relative">
+    <section id="modules" className="py-16 md:py-20 relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-10">
           <div className="text-sm font-semibold text-brand uppercase tracking-widest mb-4">
             6 modules métier
           </div>

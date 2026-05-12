@@ -33,7 +33,7 @@ const issues = [
 
 export default function Problem() {
   return (
-    <section id="problem" className="py-24 md:py-32 relative">
+    <section id="problem" className="py-16 md:py-20 relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="max-w-3xl">
           <div className="text-sm font-semibold text-accent-red uppercase tracking-widest mb-4">
@@ -49,11 +49,11 @@ export default function Problem() {
           </p>
         </div>
 
-        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {issues.map((it, i) => (
             <div
               key={i}
-              className={`relative rounded-xl border ${it.border} bg-bg-mid/50 p-6 hover:bg-bg-mid transition group overflow-hidden`}
+              className={`relative rounded-xl border ${it.border} bg-bg-mid/80 p-6 hover:bg-bg-mid transition group overflow-hidden`}
             >
               <div className={`absolute -top-12 -right-12 w-40 h-40 rounded-full bg-gradient-radial ${it.color} blur-2xl opacity-60`} />
               <div className="relative">

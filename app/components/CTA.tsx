@@ -1,8 +1,8 @@
 export default function CTA() {
   return (
-    <section id="contact" className="py-24 md:py-32 relative">
+    <section id="contact" className="py-16 md:py-20 relative">
       <div className="max-w-5xl mx-auto px-6 lg:px-10">
-        <div className="relative rounded-3xl border border-white/10 bg-gradient-to-br from-brand/10 via-bg-mid to-bg-deep p-10 md:p-16 overflow-hidden">
+        <div className="relative rounded-3xl border border-white/15 bg-gradient-to-br from-brand/20 via-bg-mid to-bg-mid p-10 md:p-14 overflow-hidden">
           {/* Halo */}
           <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-brand/30 blur-3xl" />
           <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-accent-orange/20 blur-3xl" />

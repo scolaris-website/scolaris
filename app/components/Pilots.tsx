@@ -1,8 +1,8 @@
 export default function Pilots() {
   return (
-    <section id="pilots" className="py-24 md:py-32 relative">
+    <section id="pilots" className="py-16 md:py-20 relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent-green/30 bg-accent-green/10 text-sm font-medium text-accent-green mb-6">
             <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
             Déjà en production
@@ -26,7 +26,7 @@ export default function Pilots() {
           />
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="mt-10 text-center">
           <p className="text-ink-mute max-w-2xl mx-auto leading-relaxed">
             Notre ambition : <strong className="text-white">20 écoles en 2027</strong>,
             <strong className="text-white"> 40 en 2028</strong>, puis l'expansion
@@ -40,7 +40,7 @@ export default function Pilots() {
 
 function PilotCard({ name, location, badge }: { name: string; location: string; badge: string }) {
   return (
-    <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-bg-mid to-bg-deep p-8 hover:border-accent-green/30 transition group">
+    <div className="relative rounded-2xl border border-white/15 bg-bg-mid/90 p-8 hover:border-accent-green/40 transition group">
       <div className="absolute top-6 right-6 px-3 py-1 rounded-full bg-accent-green/15 border border-accent-green/30 text-xs font-semibold text-accent-green">
         {badge}
       </div>

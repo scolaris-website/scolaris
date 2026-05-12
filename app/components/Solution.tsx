@@ -1,8 +1,8 @@
 export default function Solution() {
   return (
-    <section id="solution" className="py-24 md:py-32 relative bg-gradient-to-b from-transparent via-brand/5 to-transparent">
+    <section id="solution" className="py-16 md:py-20 relative bg-gradient-to-b from-transparent via-brand/8 to-transparent">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Texte */}
           <div>
             <div className="text-sm font-semibold text-brand uppercase tracking-widest mb-4">
