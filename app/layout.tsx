@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://scolaris.sn"),
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-    apple: "/apple-icon.png",
   },
   title: "Scolaris — Plateforme de gestion scolaire du Sénégal",
   description:
