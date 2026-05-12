@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#1e6070"/>
+      <stop offset="50%"  stop-color="#1a5565"/>
+      <stop offset="100%" stop-color="#153d50"/>
+    </linearGradient>
+    <radialGradient id="hl" cx="120" cy="100" r="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="230" y1="130" x2="310" y2="270" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#e8c547"/>
+      <stop offset="50%"  stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#a07c10"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer rounded background -->
+  <rect width="512" height="512" rx="100" ry="100" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="100" ry="100" fill="url(#hl)"/>
+
+  <!-- Inner glass card -->
+  <rect x="76" y="68" width="360" height="360" rx="52" ry="52"
+        fill="white" fill-opacity="0.13"
+        stroke="white" stroke-opacity="0.22" stroke-width="3"/>
+
+  <!-- Open book — left page -->
+  <path d="M 256 240 Q 200 205 134 232 L 134 362 Q 200 338 256 362 Z"
+        fill="none" stroke="white" stroke-opacity="0.90" stroke-width="11"
+        stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Open book — right page -->
+  <path d="M 256 240 Q 312 205 378 232 L 378 362 Q 312 338 256 362 Z"
+        fill="none" stroke="white" stroke-opacity="0.90" stroke-width="11"
+        stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Book spine -->
+  <line x1="256" y1="240" x2="256" y2="362"
+        stroke="white" stroke-opacity="0.90" stroke-width="11" stroke-linecap="round"/>
+
+  <!-- Gold student figure — stylised "S" curve (same as logo.svg) -->
+  <path d="M 278 188 C 328 188, 328 248, 254 252 C 180 256, 180 316, 278 316"
+        fill="none" stroke="url(#gold)" stroke-width="22" stroke-linecap="round"/>
+  <!-- Head -->
+  <circle cx="290" cy="172" r="20" fill="url(#gold)"/>
+</svg>
