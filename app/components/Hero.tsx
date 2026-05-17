@@ -49,7 +49,7 @@ export default function Hero() {
               Demander une démo gratuite
             </a>
             <a
-              href="https://youtu.be/d6yiiFiig9s"
+              href="/demo"
               target="_blank"
               rel="noopener noreferrer"
               className="px-7 py-4 rounded-lg border border-white/15 hover:border-accent-red/50 hover:bg-accent-red/5 text-white font-semibold text-center transition flex items-center justify-center gap-2"
@@ -141,7 +141,7 @@ export default function Hero() {
 
             {/* Badge "Démo 3 min" */}
             <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur text-xs font-semibold text-white border border-white/10">
-              ▶ Démo 3:31
+              ▶ Démo 3:27
             </div>
           </a>
 
