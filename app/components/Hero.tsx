@@ -80,50 +80,22 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Colonne droite — visuel produit */}
+        {/* Colonne droite — visuel produit (miniature avec captures réelles) */}
         <div className="relative animate-fade-up" style={{ animationDelay: "0.2s" }}>
           <a
-            href="https://youtu.be/d6yiiFiig9s"
+            href="/demo"
             target="_blank"
             rel="noopener noreferrer"
             className="block relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-brand/20 group cursor-pointer"
-            aria-label="Regarder la démo Scolaris (3 min)"
+            aria-label="Regarder la démo Scolaris (3 min 27 s)"
           >
-            <div className="aspect-[16/10] bg-gradient-to-br from-bg-mid to-bg-alt flex items-center justify-center">
-              {/* Mockup du dashboard */}
-              <div className="w-full h-full p-6 flex flex-col gap-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                  </div>
-                  <div className="text-xs text-ink-dim">scolaris.sn / dashboard</div>
-                </div>
-
-                <div className="grid grid-cols-3 gap-3 mt-3">
-                  <StatCard label="Élèves" value="847" trend="+12" color="brand" />
-                  <StatCard label="Encaissements" value="2.4M" suffix="FCFA" trend="+8%" color="green" />
-                  <StatCard label="Bulletins" value="312" trend="ce mois" color="violet" />
-                </div>
-
-                <div className="flex-1 rounded-lg bg-bg-deep/40 border border-white/5 p-4 mt-2">
-                  <div className="text-xs text-ink-mute mb-3">Activité récente</div>
-                  <div className="space-y-2">
-                    {[
-                      "Paiement enregistré — DIOP Mariama",
-                      "Bulletin publié — 6e A trimestre 2",
-                      "Notification absence — NDIAYE Pape",
-                    ].map((line, i) => (
-                      <div key={i} className="flex items-center gap-3 text-xs">
-                        <div className="w-1.5 h-1.5 rounded-full bg-accent-green" />
-                        <span className="text-ink-mute">{line}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Image miniature — captures réelles de l'app */}
+            <img
+              src="/og-image.png"
+              alt="Aperçu Scolaris — Pilotage, Élèves, Bulletins"
+              className="w-full h-auto block"
+              loading="eager"
+            />
 
             {/* Overlay vidéo — assombrissement + play */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
@@ -138,40 +110,10 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-
-            {/* Badge "Démo 3 min" */}
-            <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur text-xs font-semibold text-white border border-white/10">
-              ▶ Démo 3:27
-            </div>
           </a>
-
-          {/* Reflet */}
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 via-transparent to-transparent pointer-events-none" />
         </div>
       </div>
     </section>
   );
 }
 
-function StatCard({
-  label, value, suffix, trend, color,
-}: {
-  label: string; value: string; suffix?: string; trend: string;
-  color: "brand" | "green" | "violet";
-}) {
-  const colorMap = {
-    brand:  "border-brand/30 bg-brand/5",
-    green:  "border-accent-green/30 bg-accent-green/5",
-    violet: "border-accent-violet/30 bg-accent-violet/5",
-  };
-  return (
-    <div className={`rounded-lg border ${colorMap[color]} p-3`}>
-      <div className="text-xs text-ink-mute">{label}</div>
-      <div className="text-xl font-bold text-white mt-1">
-        {value}
-        {suffix && <span className="text-xs text-ink-dim ml-1">{suffix}</span>}
-      </div>
-      <div className="text-xs text-accent-green mt-1">{trend}</div>
-    </div>
-  );
-}
