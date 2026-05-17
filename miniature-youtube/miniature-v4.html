@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<title>Miniature YouTube Scolaris v4 — Lisible</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+  }
+
+  .thumbnail {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at top left, rgba(255,255,255,0.06), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(201,162,39,0.20), transparent 60%),
+      linear-gradient(135deg, #1e6070 0%, #1a5565 50%, #133a48 100%);
+    color: white;
+  }
+
+  /* Drapeau haut */
+  .flag {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    display: flex;
+    z-index: 20;
+  }
+  .flag div { flex: 1; }
+  .flag .green { background: #00853F; }
+  .flag .yellow { background: #FDEF42; }
+  .flag .red { background: #E31B23; }
+
+  /* Header brand */
+  .header {
+    position: absolute;
+    top: 32px; left: 50px; right: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 15;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .logo-box {
+    width: 72px; height: 72px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #1e6070, #133a48);
+    border: 2px solid rgba(255,255,255,0.22);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .brand-name { font-size: 34px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
+  .brand-tag { font-size: 11px; font-weight: 700; color: #c9a227; letter-spacing: 2.5px; margin-top: 4px; text-transform: uppercase; }
+  .badge-flag {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 18px; border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    font-size: 14px; font-weight: 700;
+    color: rgba(255,255,255,0.95);
+  }
+  .badge-flag .sn-dot {
+    width: 22px; height: 15px; border-radius: 3px;
+    background: linear-gradient(to right, #00853F 33%, #FDEF42 33%, #FDEF42 66%, #E31B23 66%);
+  }
+
+  /* Titre — colonne gauche */
+  .title {
+    position: absolute;
+    left: 50px;
+    top: 170px;
+    width: 520px;
+    z-index: 12;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 14px; border-radius: 999px;
+    background: rgba(201,162,39,0.18);
+    border: 1px solid rgba(201,162,39,0.45);
+    color: #e8c547;
+    font-size: 13px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: #e8c547; }
+  .title h1 {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 0.98;
+    letter-spacing: -2px;
+  }
+  .title h1 .gold {
+    background: linear-gradient(135deg, #e8c547, #c9a227);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .title h1 .country {
+    display: block; margin-top: 4px;
+    font-size: 76px;
+    background: linear-gradient(135deg, #ffffff 60%, #e8c547);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .tagline {
+    margin-top: 22px;
+    font-size: 17px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.45;
+    max-width: 480px;
+  }
+  .tagline strong { color: white; font-weight: 700; }
+
+  /* Footer */
+  .footer {
+    position: absolute;
+    left: 50px; bottom: 38px;
+    display: flex; gap: 18px; align-items: center;
+    z-index: 12;
+  }
+  .proof {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 17px; font-weight: 700;
+    color: rgba(255,255,255,0.95);
+  }
+  .proof .check {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #00853F;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 18px; font-weight: 900;
+  }
+  .separator { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.35); }
+
+  /* === 2 captures bien alignées === */
+  .windows {
+    position: absolute;
+    right: 40px;
+    top: 140px;
+    width: 590px;
+    height: 510px;
+    z-index: 8;
+  }
+
+  .window {
+    position: absolute;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.55);
+    border: 1.5px solid rgba(255,255,255,0.22);
+    background: white;
+  }
+
+  .win-top {
+    display: flex; align-items: center; gap: 6px;
+    padding: 9px 14px;
+    background: #f3f4f6;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .win-top .d { width: 10px; height: 10px; border-radius: 50%; }
+  .win-top .r { background: #ef4444; }
+  .win-top .y { background: #fbbf24; }
+  .win-top .g { background: #10b981; }
+  .win-top .label {
+    margin-left: 10px;
+    font-size: 11px;
+    color: #6b7280;
+    font-weight: 700;
+  }
+
+  .win-body {
+    background: white;
+    width: 100%;
+    height: calc(100% - 32px);
+    overflow: hidden;
+    position: relative;
+  }
+  .win-body img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    object-position: top left;
+  }
+
+  /* Fenêtre 1 — Pilotage (top) */
+  .win-1 {
+    top: 0;
+    right: 30px;
+    width: 530px;
+    height: 280px;
+    transform: rotate(-1deg);
+    z-index: 5;
+  }
+
+  /* Fenêtre 2 — Bulletin (bas, mise en avant) */
+  .win-2 {
+    bottom: 0;
+    left: 0;
+    width: 550px;
+    height: 310px;
+    transform: rotate(1.5deg);
+    z-index: 7;
+  }
+
+  /* Badge "NEW" sur fenêtre */
+  .new-badge {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #c9a227;
+    color: #1a1a1a;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: 0 6px 20px rgba(201, 162, 39, 0.5);
+    transform: rotate(5deg);
+  }
+
+  /* Badge durée vidéo */
+  .duration {
+    position: absolute;
+    right: 50px; bottom: 38px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    background: rgba(231, 68, 68, 0.97);
+    color: white;
+    font-size: 22px; font-weight: 800;
+    display: flex; align-items: center; gap: 10px;
+    box-shadow: 0 10px 30px rgba(231, 68, 68, 0.55);
+    z-index: 15;
+  }
+  .duration .play-icon {
+    width: 0; height: 0;
+    border-left: 13px solid white;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+  }
+
+  /* Glow doré */
+  .glow {
+    position: absolute;
+    top: 30%; left: 5%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,162,39,0.20), transparent 70%);
+    filter: blur(70px);
+    pointer-events: none;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+<div class="thumbnail">
+
+  <div class="glow"></div>
+  <div class="flag">
+    <div class="green"></div>
+    <div class="yellow"></div>
+    <div class="red"></div>
+  </div>
+
+  <div class="header">
+    <div class="brand">
+      <div class="logo-box">
+        <svg width="54" height="54" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gold-mini" x1="23" y1="19" x2="32" y2="35" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#e8c547"/>
+              <stop offset="50%" stop-color="#c9a227"/>
+              <stop offset="100%" stop-color="#a07c10"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="40" height="42" rx="6" fill="white" fill-opacity="0.13" stroke="white" stroke-opacity="0.22" stroke-width="0.8"/>
+          <path d="M 28 27 Q 21 24 15.1 27 L 15.1 38.2 Q 21.5 36 28 38.2 Z" fill="none" stroke="white" stroke-opacity="0.90" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+          <path d="M 28 27 Q 35.1 24 40.9 27 L 40.9 38.2 Q 34.5 36 28 38.2 Z" fill="none" stroke="white" stroke-opacity="0.90" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+          <line x1="28" y1="27" x2="28" y2="38.2" stroke="white" stroke-opacity="0.90" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M 29.7 23.4 C 32.3 23.4, 32.3 27.8, 27.6 28 C 22.9 28.2, 22.9 32.6, 29.7 32.6" fill="none" stroke="url(#gold-mini)" stroke-width="2.0" stroke-linecap="round"/>
+          <circle cx="30.3" cy="22.2" r="1.9" fill="url(#gold-mini)"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">Scolaris</div>
+        <div class="brand-tag">Senegalsoft</div>
+      </div>
+    </div>
+    <div class="badge-flag">
+      <div class="sn-dot"></div>
+      Sénégal · 2026
+    </div>
+  </div>
+
+  <div class="title">
+    <div class="eyebrow">
+      <span class="dot"></span>
+      Plateforme officielle
+    </div>
+    <h1>
+      La plateforme
+      <span class="gold">de gestion scolaire</span>
+      <span class="country">du SÉNÉGAL</span>
+    </h1>
+    <p class="tagline">
+      Élèves, notes, paiements, bulletins —<br>
+      <strong>tout en une seule plateforme</strong>, en français et en arabe.
+    </p>
+  </div>
+
+  <div class="footer">
+    <div class="proof">
+      <div class="check">✓</div>
+      2 écoles pilotes
+    </div>
+    <div class="separator"></div>
+    <div class="proof" style="color: rgba(255,255,255,0.85);">
+      Démo complète
+    </div>
+  </div>
+
+  <!-- 2 captures empilées -->
+  <div class="windows">
+
+    <!-- Fenêtre 1 — Pilotage Direction -->
+    <div class="window win-1">
+      <div class="win-top">
+        <div class="d r"></div><div class="d y"></div><div class="d g"></div>
+        <div class="label">📊 Direction — Pilotage</div>
+      </div>
+      <div class="win-body">
+        <img src="../public/captures/dir-pilotage.png" alt="Pilotage">
+      </div>
+    </div>
+
+    <!-- Fenêtre 2 — Bulletin -->
+    <div class="window win-2">
+      <div class="win-top">
+        <div class="d r"></div><div class="d y"></div><div class="d g"></div>
+        <div class="label">📜 Bulletin trimestriel</div>
+      </div>
+      <div class="win-body">
+        <img src="../public/captures/bul-detail.png" alt="Bulletin">
+      </div>
+      <div class="new-badge">Bilingue</div>
+    </div>
+
+  </div>
+
+  <div class="duration">
+    <div class="play-icon"></div>
+    3:27
+  </div>
+
+</div>
+</body>
+</html>
