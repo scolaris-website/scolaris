@@ -22,11 +22,21 @@ export const metadata: Metadata = {
     siteName: "Scolaris",
     locale: "fr_FR",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1281,
+        height: 723,
+        alt: "Scolaris — La plateforme de gestion scolaire du Sénégal",
+        type: "image/png",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Scolaris — Gestion scolaire du Sénégal",
     description: "Piloter, structurer et moderniser l'école.",
+    images: ["/og-image.png"],
   },
 };
 
