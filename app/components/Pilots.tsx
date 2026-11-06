@@ -1,60 +1,9 @@
 export default function Pilots() {
-  return (
-    <section id="pilots" className="py-16 md:py-20 relative">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent-green/30 bg-accent-green/10 text-sm font-medium text-accent-green mb-6">
-            <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
-            Déjà en production
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-            Deux écoles pilotes utilisent<br />
-            <span className="text-accent-green">déjà Scolaris avec succès.</span>
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <PilotCard
-            name="École El Hadji Ibrahima NIASS"
-            location="Dakar, Sénégal"
-            badge="Pilote N°1"
-          />
-          <PilotCard
-            name="École Vision Bilingue"
-            location="Dakar, Sénégal"
-            badge="Pilote N°2"
-          />
-        </div>
-
-        <div className="mt-10 text-center">
-          <p className="text-ink-mute max-w-2xl mx-auto leading-relaxed">
-            Notre ambition : <strong className="text-white">20 écoles en 2027</strong>,
-            <strong className="text-white"> 40 en 2028</strong>, puis l'expansion
-            vers l'Afrique de l'Ouest francophone.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PilotCard({ name, location, badge }: { name: string; location: string; badge: string }) {
-  return (
-    <div className="relative rounded-2xl border border-white/15 bg-bg-mid/90 p-8 hover:border-accent-green/40 transition group">
-      <div className="absolute top-6 right-6 px-3 py-1 rounded-full bg-accent-green/15 border border-accent-green/30 text-xs font-semibold text-accent-green">
-        {badge}
-      </div>
-      <div className="w-14 h-14 rounded-xl bg-brand/20 border border-brand/30 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
-        🏫
-      </div>
-      <h3 className="text-xl font-bold text-white mb-2">{name}</h3>
-      <div className="text-sm text-ink-mute">{location}</div>
-      <div className="mt-5 pt-5 border-t border-white/10 flex items-center gap-2 text-xs text-ink-dim">
-        <svg className="w-4 h-4 text-accent-green" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-        </svg>
-        Plateforme déployée et utilisée au quotidien
-      </div>
-    </div>
-  );
+ return <section id="pour-qui" className="py-20"><div className="max-w-7xl mx-auto px-6 lg:px-10">
+ <div className="max-w-3xl"><p className="text-sm text-brand-light font-bold uppercase tracking-widest mb-4">À qui s'adresse Scolaris ?</p><h2 className="text-3xl md:text-5xl font-bold">Une solution pensée pour les décisions du terrain.</h2><p className="text-ink-mute text-lg mt-5">Nous privilégions les établissements qui veulent fiabiliser leurs données, leurs bulletins et leur gestion des frais scolaires.</p></div>
+ <div className="grid md:grid-cols-3 gap-5 mt-10">
+  {[["🏫","Directions d'écoles privées","Suivre les inscriptions, les résultats scolaires et les encaissements avec une vision d'ensemble."],["📚","Écoles et groupes scolaires","Organiser les classes et les évaluations du primaire au lycée, selon votre structure."],["🧾","Équipes administratives","Retrouver rapidement une fiche élève, un solde, un paiement ou un reçu."]].map(([icon,title,text])=><article key={title} className="p-7 rounded-2xl border border-white/10 bg-bg-mid"><div className="text-3xl mb-5">{icon}</div><h3 className="text-xl font-bold mb-3">{title}</h3><p className="text-sm text-ink-mute leading-relaxed">{text}</p></article>)}
+ </div>
+ <div className="mt-10 rounded-xl border border-accent-green/20 bg-accent-green/5 p-5 text-sm text-ink-mute">Une école fictive de démonstration permet d'illustrer le fonctionnement de Scolaris, sans exposer de données réelles d'élèves ou de familles.</div>
+ </div></section>;
 }
